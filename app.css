@@ -1,0 +1,56 @@
+.button-active {
+  border: 1px solid;
+}
+
+/* NHS News colours */
+.md-button.button-news-3:not([disabled]) {
+  background-color: rgba(241, 181, 156, .9);
+}
+
+.md-button.button-news-3:not([disabled]):hover, .risk-high {
+  background-color: rgba(231, 136, 108, .9);
+}
+
+.md-button.button-news-2:not([disabled]) {
+  background-color: rgba(247, 214, 174, .9);
+}
+
+.md-button.button-news-2:not([disabled]):hover, .risk-medium {
+  background-color: rgba(240, 189, 131, .9);
+}
+
+.md-button.button-news-1:not([disabled]) {
+  background-color: rgba(225, 238, 217, .9);
+}
+
+.md-button.button-news-1:not([disabled]):hover, .risk-low {
+  background-color: rgba(209, 229, 200, .9);
+}
+
+.md-button.button-news-0:not([disabled]) {
+  background-color: rgba(242, 242, 242, .9);
+}
+
+.md-button.button-news-0:not([disabled]):hover {
+  background-color: rgba(204, 204, 204, .9);
+}
+
+.grid-header {
+  color: white;
+  background-color: #496aa2;
+  padding: 0.2em;
+  font-weight: bold;
+}
+
+.score-container {
+  margin-top: 2em;
+}
+
+.score {
+  /*padding: .5em;*/
+}
+
+.red-score {
+  color: #c22630;
+}
+
