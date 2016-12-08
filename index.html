@@ -1,0 +1,102 @@
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <title>National Early Warning Score UI prototype</title>
+  <!-- Angular Material style sheet -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body ng-app="news" ng-cloak>
+<div ng-controller="MeasurementController as vm" layout="column">
+  <md-toolbar class="md-primary">
+    <div class="md-toolbar-tools">
+      <h1>National Early Warning Score</h1>
+      <span flex></span>
+      <md-button class="md-raised" ng-show="vm.score!==undefined" ng-click="vm.reset()">Reset</md-button>
+    </div>
+  </md-toolbar>
+
+  <!-- Score display -->
+  <md-subheader ng-class="{'red-score': vm.redScore, 'risk-low': vm.score < 5, 'risk-medium': vm.score === 5 || vm.score === 6, 'risk-high': vm.score > 6}">
+    <span ng-hide="vm.score!==undefined">
+      Please select measurements below.
+    </span>
+    <span ng-show="vm.score!==undefined">
+      Score: {{ vm.score }},
+      clinical risk
+      <span ng-show="vm.score < 5">low</span>
+      <span ng-show="vm.score === 5 || vm.score === 6">medium</span>
+      <span ng-show="vm.score > 6">high</span>
+      <span ng-show="vm.redScore"> (RED score)</span>
+    </span>
+  </md-subheader>
+
+  <md-content flex layout-padding>
+    <!-- Grid, visible from medium screens onwards -->
+    <md-grid-list md-cols-gt-md="9" md-cols-sm="9" md-cols-md="9" md-row-height="50px" hide-sm hide-xs>
+      <md-grid-tile md-colspan-gt-sm="2" class="grid-header">Physiologic parameters</md-grid-tile>
+      <md-grid-tile class="grid-header">3</md-grid-tile>
+      <md-grid-tile class="grid-header">2</md-grid-tile>
+      <md-grid-tile class="grid-header">1</md-grid-tile>
+      <md-grid-tile class="grid-header">0</md-grid-tile>
+      <md-grid-tile class="grid-header">1</md-grid-tile>
+      <md-grid-tile class="grid-header">2</md-grid-tile>
+      <md-grid-tile class="grid-header">3</md-grid-tile>
+
+      <md-grid-tile md-colspan-gt-sm="2" class="grid-header" ng-repeat-start="row in vm.newsMatrix">
+        {{ row.title }}
+      </md-grid-tile>
+
+      <md-grid-tile ng-repeat="cell in row.values">
+        <md-button ng-click="vm.toggleActiveCell(row, cell)" ng-class="{'md-raised': row.active!==cell, 'button-active': row.active===cell, 'button-news-3': cell.value===3, 'button-news-2': cell.value===2, 'button-news-1': cell.value===1, 'button-news-0': cell.value===0}" ng-disabled="cell.disabled">
+          {{ cell.title }}
+        </md-button>
+      </md-grid-tile>
+
+      <span ng-repeat-end />
+    </md-grid-list>
+
+    <!-- List view for small and extra small screens -->
+    <md-list hide-md hide-lg hide-xl>
+      <md-list-item ng-repeat="row in vm.newsMatrix">
+        <p>{{ row.title }}</p>
+        <md-menu class="md-secondary">
+          <md-button ng-bind="row.active.title || 'Please select'" ng-class="{'button-news-3': row.active.value===3, 'button-news-2': row.active.value===2, 'button-news-1': row.active.value===1, 'button-news-0': row.active.value===0}">
+          </md-button>
+          <md-menu-content width="4">
+            <md-menu-item ng-repeat="cell in row.values" ng-show="cell.disabled===false">
+              <md-button ng-click="vm.toggleActiveCell(row, cell)" ng-class="{'button-news-3': cell.value===3, 'button-news-2': cell.value===2, 'button-news-1': cell.value===1, 'button-news-0': cell.value===0}">
+                {{ cell.title }}
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+      </md-list-item>
+    </md-list>
+
+    <p>
+      <em>Source:</em>
+      <a href="https://www.rcplondon.ac.uk/file/32/download?token=vfwDKQVS" class="md-primary">
+        National Early Warning Score (NEWS),
+        Standardising the assessment of acute-illness severity in the NHS,
+        July 2012
+      </a>
+    </p>
+  </md-content>
+</div>
+
+<!-- AngularJS libraries -->
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+
+<!-- Angular Material library -->
+<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+<!-- App script -->
+<script src="app.js"></script>
+</body>
+</html>
