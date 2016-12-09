@@ -49,8 +49,8 @@
         {{ row.title }}
       </md-grid-tile>
 
-      <md-grid-tile ng-repeat="cell in row.values">
-        <md-button ng-click="vm.toggleActiveCell(row, cell)" ng-class="{'md-raised': row.active!==cell, 'button-active': row.active===cell, 'button-news-3': cell.value===3, 'button-news-2': cell.value===2, 'button-news-1': cell.value===1, 'button-news-0': cell.value===0}" ng-disabled="cell.disabled">
+      <md-grid-tile ng-repeat="cell in row.values" ng-class="{'tile-active': row.active===cell, 'md-whiteframe-1dp': row.active===cell}">
+        <md-button ng-click="vm.toggleActiveCell(row, cell)" ng-class="{'md-raised': row.active!==cell, 'button-news-3': cell.value===3, 'button-news-2': cell.value===2, 'button-news-1': cell.value===1, 'button-news-0': cell.value===0}" ng-hide="cell.disabled">
           {{ cell.title }}
         </md-button>
       </md-grid-tile>

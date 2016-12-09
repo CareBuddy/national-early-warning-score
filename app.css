@@ -1,5 +1,5 @@
-.button-active {
-  border: 1px solid;
+.tile-active {
+  background-color: rgba(0,0,0,0.12);
 }
 
 .grid-header {
